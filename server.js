@@ -3,17 +3,24 @@
  */
 var http = require("http");
 var url = require("url");
+var util = require("util");
+
+var num = 0;
 
 function start(route){
     function onRequest(request, response){
-        var pathname = url.parse(request.url).pathname;
-        console.log("request for:",pathname);
+        var query = url.parse(request.url,true).query;
+        route(query);
 
-        route(pathname);
-
+        response.setHeader("Access-Control-Allow-Origin","*");
         response.writeHead(200,{"Content-Type":"text/plain"});
-        response.write("Hello World 2");
-        response.end();
+
+        num++;
+        var result = {};
+        result.r = {"num":num};
+        result.s = 0;
+        response.write(JSON.stringify(result));
+        response.end(util.inspect(url.parse(request.url,true)));
     }
 
     http.createServer(onRequest).listen(8888,'0.0.0.0');

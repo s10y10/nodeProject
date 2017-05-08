@@ -1,8 +1,8 @@
 /**
  * Created by sy on 2017/3/15.
  */
-function route(pathname){
-    console.log("route pathname:",pathname);
+function route(query){
+    console.log("query:",query);
 }
 
 exports.route = route;

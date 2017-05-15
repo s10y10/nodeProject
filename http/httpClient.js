@@ -6,7 +6,7 @@ var http = require("http");
 var p = {
     host:'10.0.9.133',
     port:8888,
-    path:'/index.html'
+    path:'/postget.html'
 }
 
 function callback(res){
